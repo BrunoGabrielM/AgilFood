@@ -12,7 +12,7 @@ namespace AgilFood.Models
     public class Cardapio
     {
         public long? CardapioId { get; set; }
-        public string Nome { get; set; }
+        public string Nome { get; set; } 
 
 
         public long? FornecedorId { get; set; }
