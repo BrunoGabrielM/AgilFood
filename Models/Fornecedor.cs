@@ -9,7 +9,7 @@ namespace AgilFood.Models
     public class Fornecedor
     {
         public long? FornecedorId { get; set; }
-        public string Nome { get; set; }
+        public string Nome { get; set; } 
 
         public Cardapio Cardapio { get; set; }
         public ICollection<Servico> Servicos { get; set; }
