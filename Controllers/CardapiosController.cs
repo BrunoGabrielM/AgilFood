@@ -49,6 +49,7 @@ namespace AgilFood.Controllers
             var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
 
             return Ok(result);
+            
         }
 
         [HttpPut("{id}")] 
@@ -61,7 +62,7 @@ namespace AgilFood.Controllers
                 return BadRequest(ModelState);
             }
 
-            //primeiro vamos achar o cardapio no banco 
+            //primeiro vamos achar o cardapio no  banco 
             var cardapio = await _context.Cardapios.SingleOrDefaultAsync(c => c.CardapioId == id);
 
             //Se nao existir esse objeto no banco
