@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AgilFood.Models
+namespace AgilFood.Core.Models
 {
     [Table("Cardapios")]
     public class Cardapio
     {
-        public long? CardapioId { get; set; }
+        public int CardapioId { get; set; }
         public string Nome { get; set; } 
 
 

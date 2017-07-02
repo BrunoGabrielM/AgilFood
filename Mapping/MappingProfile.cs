@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgilFood.Controllers.Resource;
-using AgilFood.Models;
+using AgilFood.Core.Models;
 using AutoMapper;
 
 namespace AgilFood.Mapping

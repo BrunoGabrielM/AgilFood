@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgilFood.Controllers.Resource;
-using AgilFood.Models;
+using AgilFood.Core;
+using AgilFood.Core.Models;
 using AgilFood.Persistence;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -14,19 +15,22 @@ namespace AgilFood.Controllers
     [Route("/api/cardapios")]
     public class CardapiosController : Controller
     {
-        private readonly AgilFoodDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ICardapioRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CardapiosController(AgilFoodDbContext context, IMapper mapper)
+        public CardapiosController(IMapper mapper, ICardapioRepository repository, IUnitOfWork unitOfWork)
         {
-            _context = context;
             _mapper = mapper;
+            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
+
 
         [HttpGet]
         public async Task<IEnumerable<CardapioResource>> GetCardapios()
         {
-            var cardapios = await _context.Cardapios.Include(m => m.Itens).ToListAsync();
+            var cardapios = await _repository.GetCardapios();
   
             return Mapper.Map<List<Cardapio>, List<CardapioResource>>(cardapios);
         }
@@ -43,8 +47,10 @@ namespace AgilFood.Controllers
 
             var cardapio = Mapper.Map<CardapioResource, Cardapio>(cardapioResource);
             
-            _context.Cardapios.Add(cardapio);
-            await _context.SaveChangesAsync();
+            _repository.Add(cardapio);
+            await _unitOfWork.CompleteAsync();
+
+            cardapio = await _repository.GetCardapio(cardapio.CardapioId);
 
             var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
 
@@ -62,8 +68,8 @@ namespace AgilFood.Controllers
                 return BadRequest(ModelState);
             }
 
-            //primeiro vamos achar o cardapio no  banco 
-            var cardapio = await _context.Cardapios.SingleOrDefaultAsync(c => c.CardapioId == id);
+            //primeiro vamos achar o cardapio no banco 
+            var cardapio = await _repository.GetCardapio(id);
 
             //Se nao existir esse objeto no banco
             if (cardapio == null)
@@ -72,8 +78,9 @@ namespace AgilFood.Controllers
             }
             Mapper.Map<CardapioResource, Cardapio>(cardapioResource, cardapio);
 
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
 
+            cardapio = await _repository.GetCardapio(cardapio.CardapioId);
             var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
 
             return Ok(result);
@@ -83,7 +90,7 @@ namespace AgilFood.Controllers
         public async Task<IActionResult> DeleteVehicle(int id)
         {
             //primeiro vamos achar o cardapio no banco pelo Id
-            var cardapio = await _context.Cardapios.FindAsync(id);
+            var cardapio = await _repository.GetCardapio(id, includeRelated: false);
 
             //Se nao existir esse objeto no banco
             if (cardapio == null)
@@ -91,8 +98,8 @@ namespace AgilFood.Controllers
                 return NotFound();
             }
 
-            _context.Remove(cardapio);
-            await _context.SaveChangesAsync();
+            _repository.Remove(cardapio);
+            await _unitOfWork.CompleteAsync();
 
             return Ok(id);
         }
@@ -100,7 +107,7 @@ namespace AgilFood.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var cardapio = await _context.Cardapios.SingleOrDefaultAsync(v => v.CardapioId == id);
+            var cardapio = await _repository.GetCardapio(id);
 
             //Se nao existir esse objeto no banco
             if (cardapio == null)
