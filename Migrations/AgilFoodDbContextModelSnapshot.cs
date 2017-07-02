@@ -16,12 +16,12 @@ namespace AgilFood.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AgilFood.Models.Cardapio", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Cardapio", b =>
                 {
-                    b.Property<long?>("CardapioId")
+                    b.Property<int>("CardapioId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("FornecedorId");
+                    b.Property<int>("FornecedorId");
 
                     b.Property<string>("Nome");
 
@@ -33,9 +33,9 @@ namespace AgilFood.Migrations
                     b.ToTable("Cardapios");
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Fornecedor", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Fornecedor", b =>
                 {
-                    b.Property<long?>("FornecedorId")
+                    b.Property<int>("FornecedorId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Nome");
@@ -45,12 +45,12 @@ namespace AgilFood.Migrations
                     b.ToTable("Fornecedores");
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Item", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Item", b =>
                 {
-                    b.Property<long?>("ItemId")
+                    b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("CardapioId");
+                    b.Property<int>("CardapioId");
 
                     b.Property<string>("Nome");
 
@@ -63,12 +63,12 @@ namespace AgilFood.Migrations
                     b.ToTable("Itens");
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Servico", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Servico", b =>
                 {
-                    b.Property<long?>("ServicoId")
+                    b.Property<int>("ServicoId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("FornecedorId");
+                    b.Property<int>("FornecedorId");
 
                     b.Property<string>("Nome");
 
@@ -81,25 +81,28 @@ namespace AgilFood.Migrations
                     b.ToTable("Servicos");
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Cardapio", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Cardapio", b =>
                 {
-                    b.HasOne("AgilFood.Models.Fornecedor", "Fornecedor")
+                    b.HasOne("AgilFood.Core.Models.Fornecedor", "Fornecedor")
                         .WithOne("Cardapio")
-                        .HasForeignKey("AgilFood.Models.Cardapio", "FornecedorId");
+                        .HasForeignKey("AgilFood.Core.Models.Cardapio", "FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Item", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Item", b =>
                 {
-                    b.HasOne("AgilFood.Models.Cardapio", "Cardapio")
+                    b.HasOne("AgilFood.Core.Models.Cardapio", "Cardapio")
                         .WithMany("Itens")
-                        .HasForeignKey("CardapioId");
+                        .HasForeignKey("CardapioId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AgilFood.Models.Servico", b =>
+            modelBuilder.Entity("AgilFood.Core.Models.Servico", b =>
                 {
-                    b.HasOne("AgilFood.Models.Fornecedor", "Fornecedor")
+                    b.HasOne("AgilFood.Core.Models.Fornecedor", "Fornecedor")
                         .WithMany("Servicos")
-                        .HasForeignKey("FornecedorId");
+                        .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

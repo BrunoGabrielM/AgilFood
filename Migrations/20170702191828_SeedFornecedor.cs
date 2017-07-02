@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AgilFood.Migrations
 {
-    public partial class SeedFornecedores : Migration
+    public partial class SeedFornecedor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

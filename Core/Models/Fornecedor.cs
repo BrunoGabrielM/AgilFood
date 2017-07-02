@@ -5,7 +5,7 @@ namespace AgilFood.Core.Models
 {
     public class Fornecedor
     {
-        public long? FornecedorId { get; set; }
+        public int FornecedorId { get; set; }
         public string Nome { get; set; } 
 
         public Cardapio Cardapio { get; set; }

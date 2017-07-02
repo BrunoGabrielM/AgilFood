@@ -8,7 +8,7 @@ namespace AgilFood.Controllers.Resource
 {
     public class FornecedorResource
     {
-        public long? FornecedorId { get; set; }
+        public int FornecedorId { get; set; }
         public string Nome { get; set; }
 
 

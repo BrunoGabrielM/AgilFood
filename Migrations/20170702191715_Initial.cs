@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace AgilFood.Migrations
 {
-    public partial class InitialModel : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace AgilFood.Migrations
                 name: "Fornecedores",
                 columns: table => new
                 {
-                    FornecedorId = table.Column<long>(nullable: false)
+                    FornecedorId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true)
                 },
@@ -26,9 +26,9 @@ namespace AgilFood.Migrations
                 name: "Cardapios",
                 columns: table => new
                 {
-                    CardapioId = table.Column<long>(nullable: false)
+                    CardapioId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FornecedorId = table.Column<long>(nullable: true),
+                    FornecedorId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -39,16 +39,16 @@ namespace AgilFood.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Servicos",
                 columns: table => new
                 {
-                    ServicoId = table.Column<long>(nullable: false)
+                    ServicoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FornecedorId = table.Column<long>(nullable: true),
+                    FornecedorId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
                     Preco = table.Column<double>(nullable: false)
                 },
@@ -60,16 +60,16 @@ namespace AgilFood.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Itens",
                 columns: table => new
                 {
-                    ItemId = table.Column<long>(nullable: false)
+                    ItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CardapioId = table.Column<long>(nullable: true),
+                    CardapioId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
                     Preco = table.Column<double>(nullable: false)
                 },
@@ -81,7 +81,7 @@ namespace AgilFood.Migrations
                         column: x => x.CardapioId,
                         principalTable: "Cardapios",
                         principalColumn: "CardapioId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -45,7 +45,7 @@ namespace AgilFood.Controllers
                 return BadRequest(ModelState);
             }
 
-            var cardapio = Mapper.Map<CardapioResource, Cardapio>(cardapioResource);
+            var cardapio = Mapper.Map<Cardapio>(cardapioResource);
             
             _repository.Add(cardapio);
             await _unitOfWork.CompleteAsync();
@@ -87,7 +87,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVehicle(int id)
+        public async Task<IActionResult> DeleteCardapio(int id)
         {
             //primeiro vamos achar o cardapio no banco pelo Id
             var cardapio = await _repository.GetCardapio(id, includeRelated: false);
@@ -105,7 +105,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVehicle(int id)
+        public async Task<IActionResult> GetCardapio(int id)
         {
             var cardapio = await _repository.GetCardapio(id);
 

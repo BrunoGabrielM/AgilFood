@@ -19,9 +19,7 @@ namespace AgilFood.Mapping
             CreateMap<Servico, ServicoResource>();
 
             //API Resource to Domain [Para fazer o CRUD]
-            CreateMap<CardapioResource, Cardapio>()
-                .ForMember(c => c.CardapioId, opt => opt.Ignore()) //pra nao dar erro no postman
-                .ForMember(c => c.FornecedorId, opt => opt.Ignore()); 
+            CreateMap<CardapioResource, Cardapio>(); 
 
 
         }

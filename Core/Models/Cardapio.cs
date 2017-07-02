@@ -11,7 +11,7 @@ namespace AgilFood.Core.Models
         public string Nome { get; set; } 
 
 
-        public long? FornecedorId { get; set; }
+        public int FornecedorId { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public ICollection<Item> Itens { get; set; }
 
