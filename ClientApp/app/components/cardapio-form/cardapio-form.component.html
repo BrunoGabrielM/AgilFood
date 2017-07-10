@@ -1,17 +1,16 @@
 <h1>Novo Cardapio</h1>
-<form>
+<p>
+  <!--Para saber certinho oque esta sendo enviado-->
+</p>
+<form (ngSubmit)="submit()"> 
+  <h2>Tipo do Cardapio</h2>
+
+  <!--TextBox-->
   <div class="form-group">
-    <label for="cardapio">Cardapio</label>
-    <select id="cardapio" class="form-control" (change)="onCardapioChange()" [(ngModel)]="restaurante.cardapio" name="cardapio"> <!--DropdownList, the change event, é para atualiazar a dropdown-->
-      <option value=""></option>
-      <option *ngFor="let m of cardapios" value="{{m.CardapioId}}">{{m.nome}}</option>
-    </select>
+    <label for="Nome">Nome</label>
+    <input id="cardapioNome" type="text" class="form-control" [(ngModel)]="cardapio.nome" name="Nome">
   </div>
-  <div class="form-group">
-    <label for="item">Item</label>
-    <select id="item" class="form-control">
-      <option value=""></option>
-      <option *ngFor="let i of itens" value="{{i.ItemId}}">{{i.nome}}</option>
-    </select>
-  </div> 
+  
+   <!--Button-->
+  <button class="btn btn-primary">Salvar</button>
 </form>

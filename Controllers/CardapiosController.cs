@@ -39,18 +39,10 @@ namespace AgilFood.Controllers
         public async Task<IActionResult> CreateCardapio([FromBody] CardapioResource cardapioResource)
         {
 
-            //Validações (server side validations)
-            if (!ModelState.IsValid) //Validar as anotations(Required, etc)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var cardapio = Mapper.Map<Cardapio>(cardapioResource);
+            var cardapio = Mapper.Map<CardapioResource, Cardapio>(cardapioResource);
             
             _repository.Add(cardapio);
             await _unitOfWork.CompleteAsync();
-
-            cardapio = await _repository.GetCardapio(cardapio.CardapioId);
 
             var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
 
@@ -76,6 +68,7 @@ namespace AgilFood.Controllers
             {
                 return NotFound();
             }
+
             Mapper.Map<CardapioResource, Cardapio>(cardapioResource, cardapio);
 
             await _unitOfWork.CompleteAsync();

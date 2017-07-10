@@ -33,6 +33,7 @@ namespace AgilFood
         public void ConfigureServices(IServiceCollection services)
         {
             //Temos que registrar aqui as nossas interfaces
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<ICardapioRepository, CardapioRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
