@@ -11,6 +11,7 @@ namespace AgilFood.Persistence
     {
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Cardapio> Cardapios { get; set; }
+        public DbSet<Item> Items { get; set; }
 
 
         public AgilFoodDbContext(DbContextOptions<AgilFoodDbContext> options) 

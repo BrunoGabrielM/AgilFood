@@ -29,7 +29,7 @@ namespace AgilFood.Persistence
 
             return await _context.Cardapios
                            .Include(c => c.Itens)
-                           .SingleOrDefaultAsync(c => c.CardapioId == id);
+                         .SingleOrDefaultAsync(c => c.CardapioId == id);
 
         }
 

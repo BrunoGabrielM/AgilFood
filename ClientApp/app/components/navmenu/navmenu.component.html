@@ -22,6 +22,11 @@
                         <span class='glyphicon glyphicon-plus'></span> Novo Cardapio
                     </a>
                 </li>
+                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/itens/novo']">
+                        <span class='glyphicon glyphicon-plus'></span> Novo Item
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fornecedores/novo']">
                         <span class='glyphicon glyphicon-plus'></span> Novo Fornecedor

@@ -10,5 +10,6 @@ namespace AgilFood.Controllers.Resource
         public int ItemId { get; set; }
         public string Nome { get; set; }
         public double Preco { get; set; }
+        public int CardapioId { get; set; }
     }
 }

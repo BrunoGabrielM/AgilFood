@@ -35,6 +35,7 @@ namespace AgilFood
             //Temos que registrar aqui as nossas interfaces
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<ICardapioRepository, CardapioRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper();

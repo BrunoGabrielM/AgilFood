@@ -10,7 +10,8 @@ export class FornecedorFormComponent implements OnInit {
 
   //Variavei
   fornecedor: any = {
-    nome: ''  
+    nome: '',
+    id: 0
   }
   //precisamos inicializar para poder fazer o binding
 
@@ -25,4 +26,5 @@ export class FornecedorFormComponent implements OnInit {
     this.fornecedorService.create(this.fornecedor)
       .subscribe(x => console.log(x));
   }
+    
 }

@@ -1,7 +1,7 @@
 import { CardapioService } from './../../services/cardapio.service';
 import { RestauranteService } from './../../services/restaurante.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-cardapio-form',
@@ -11,13 +11,16 @@ import { ActivatedRoute } from "@angular/router";
 export class CardapioFormComponent implements OnInit {
 
   cardapio : any = {
+    id: 0,
     nome: '',
-    idFornecedor: 12  
+    FornecedorId: 0
   }
 
-  constructor(private cardapioService: CardapioService, private route: ActivatedRoute) {
-      route.params.subscribe(param => this.cardapio.FornecedorId = param['id'])
-   }
+  constructor(private cardapioService: CardapioService, 
+              private router: ActivatedRoute){
+
+      router.params.subscribe(param => this.cardapio.FornecedorId = param['id'])
+  }
 
   ngOnInit() {
     
@@ -27,4 +30,5 @@ export class CardapioFormComponent implements OnInit {
     this.cardapioService.create(this.cardapio)
       .subscribe(x => console.log(x));
   }
+
 }

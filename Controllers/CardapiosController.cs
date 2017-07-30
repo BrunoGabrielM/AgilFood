@@ -44,9 +44,9 @@ namespace AgilFood.Controllers
             _repository.Add(cardapio);
             await _unitOfWork.CompleteAsync();
 
-            var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
+            //var result = _mapper.Map<Cardapio, CardapioResource>(cardapio);
 
-            return Ok(result);
+            return Ok(cardapio.CardapioId); //estou apenas retornando o Id para facitar a transição de telas na hora do cadastro
             
         }
 
@@ -97,20 +97,20 @@ namespace AgilFood.Controllers
             return Ok(id);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCardapio(int id)
-        {
-            var cardapio = await _repository.GetCardapio(id);
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetCardapio(int id)
+        //{
+        //    var cardapio = await _repository.GetCardapio(id);
 
-            //Se nao existir esse objeto no banco
-            if (cardapio == null)
-            {
-                return NotFound();
-            }
+        //    //Se nao existir esse objeto no banco
+        //    if (cardapio == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var cardapioResource = Mapper.Map<Cardapio, CardapioResource>(cardapio);
+        //    var cardapioResource = Mapper.Map<Cardapio, CardapioResource>(cardapio);
 
-            return Ok(cardapioResource);
-        }
+        //    return Ok(cardapioResource);
+        //}
     }
 }

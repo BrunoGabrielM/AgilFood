@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.ModelBinding;
 using AgilFood.Controllers.Resource;
 using AgilFood.Core;
 using AgilFood.Core.Models;

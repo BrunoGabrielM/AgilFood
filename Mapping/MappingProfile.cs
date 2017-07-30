@@ -21,6 +21,7 @@ namespace AgilFood.Mapping
             //API Resource to Domain [Para fazer o CRUD]
             CreateMap<CardapioResource, Cardapio>();
             CreateMap<FornecedorResource, Fornecedor>();
+            CreateMap<ItemResource, Item>();
             
         }
     }

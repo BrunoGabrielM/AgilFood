@@ -1,3 +1,4 @@
+import { ItemService } from './services/item.service';
 import { CardapioService } from './services/cardapio.service';
 import { FornecedorService } from './services/fornecedor.service';
 import { FormsModule } from '@angular/forms'; 
@@ -13,6 +14,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { CardapioFormComponent } from "./components/cardapio-form/cardapio-form.component";
 import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor-form.component';
+import { ItemFormComponent } from "./components/item-form/item-form.component";
+
 
 
 
@@ -25,7 +28,8 @@ import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor
         FetchDataComponent,
         HomeComponent,
         CardapioFormComponent,
-        FornecedorFormComponent
+        FornecedorFormComponent,
+        ItemFormComponent
     ],
     imports: [
         FormsModule,
@@ -33,6 +37,7 @@ import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'cardapios/novo/:id', component: CardapioFormComponent },
+            { path: 'itens/novo/:id', component: ItemFormComponent },
             { path: 'fornecedores/novo', component: FornecedorFormComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
@@ -44,7 +49,8 @@ import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor
     providers: [
       RestauranteService,
       FornecedorService,
-      CardapioService
+      CardapioService,
+      ItemService
     ]
 })
 export class AppModule {
