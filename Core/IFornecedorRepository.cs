@@ -11,5 +11,6 @@ namespace AgilFood.Core
         Task<Fornecedor> GetFornecedor(int id, bool includeRelated = true);
         void Add(Fornecedor fornecedor);
         void Remove(Fornecedor fornecedor);
+        Task<IEnumerable<Fornecedor>> GetFornecedores();
     }
 }

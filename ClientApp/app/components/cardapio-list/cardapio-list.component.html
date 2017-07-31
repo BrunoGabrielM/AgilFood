@@ -1,0 +1,24 @@
+<h2>Cardapios</h2>
+<!--Montando a tabela-->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>fornecedorId</th>
+      <th></th>
+    </tr>
+  </thead>  
+  <tbody>
+    <tr *ngFor="let c of cardapios">
+      <td>{{ c.cardapioId }}</td>
+      <td>{{ c.nome }}</td>
+      <td>{{ c.fornecedorId }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  {{ cardapio.fornecedorId }}
+  {{ cardapio.peso }}
+</div>

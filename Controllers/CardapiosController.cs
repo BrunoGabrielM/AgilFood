@@ -53,8 +53,7 @@ namespace AgilFood.Controllers
         [HttpPut("{id}")] 
         public async Task<IActionResult> UpdateCardapio(int id, [FromBody] CardapioResource cardapioResource)
         {
-
-
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -97,20 +96,20 @@ namespace AgilFood.Controllers
             return Ok(id);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetCardapio(int id)
-        //{
-        //    var cardapio = await _repository.GetCardapio(id);
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCardapio(int id)
+        {
+            var cardapio = await _repository.GetCardapio(id);
 
-        //    //Se nao existir esse objeto no banco
-        //    if (cardapio == null)
-        //    {
-        //        return NotFound();
-        //    }
+            //Se nao existir esse objeto no banco
+            if (cardapio == null)
+            {
+                return NotFound();
+            }
 
-        //    var cardapioResource = Mapper.Map<Cardapio, CardapioResource>(cardapio);
+            var cardapioResource = Mapper.Map<Cardapio, CardapioResource>(cardapio);
 
-        //    return Ok(cardapioResource);
-        //}
+            return Ok(cardapioResource);
+        }
     }
 }

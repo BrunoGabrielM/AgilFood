@@ -15,6 +15,8 @@ import { CounterComponent } from './components/counter/counter.component';
 import { CardapioFormComponent } from "./components/cardapio-form/cardapio-form.component";
 import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor-form.component';
 import { ItemFormComponent } from "./components/item-form/item-form.component";
+import { FornecedorListComponent } from './components/fornecedor-list/fornecedor-list.component';
+import { CardapioListComponent } from './components/cardapio-list/cardapio-list.component';
 
 
 
@@ -29,7 +31,9 @@ import { ItemFormComponent } from "./components/item-form/item-form.component";
         HomeComponent,
         CardapioFormComponent,
         FornecedorFormComponent,
-        ItemFormComponent
+        ItemFormComponent,
+        FornecedorListComponent,
+        CardapioListComponent
     ],
     imports: [
         FormsModule,
@@ -39,6 +43,9 @@ import { ItemFormComponent } from "./components/item-form/item-form.component";
             { path: 'cardapios/novo/:id', component: CardapioFormComponent },
             { path: 'itens/novo/:id', component: ItemFormComponent },
             { path: 'fornecedores/novo', component: FornecedorFormComponent },
+            { path: 'fornecedores', component: FornecedorListComponent },
+            { path: 'cardapios', component: CardapioListComponent },
+            { path: 'cardapios/:fornId', component: CardapioListComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },

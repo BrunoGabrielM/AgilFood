@@ -17,6 +17,7 @@ namespace AgilFood.Persistence
             _context = context;
         }
 
+
         public async Task<Fornecedor> GetFornecedor(int id, bool includeRelated = true)
         {
             return await _context.Fornecedores
@@ -31,6 +32,11 @@ namespace AgilFood.Persistence
         public void Remove(Fornecedor fornecedor)
         {
             _context.Fornecedores.Remove(fornecedor);
+        }
+
+        public async Task<IEnumerable<Fornecedor>> GetFornecedores()
+        {
+            return await _context.Fornecedores.ToListAsync();
         }
     }
 }

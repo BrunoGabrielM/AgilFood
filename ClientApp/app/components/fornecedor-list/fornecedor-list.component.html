@@ -1,0 +1,24 @@
+<h2>Fornecedores</h2>
+<p>
+  <a [routerLink]="['/fornecedor/novo']" class="btn btn-primary">Novo Fornecedor</a>
+</p>
+
+<!--Montando a tabela-->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th></th>
+    </tr>
+  </thead>  
+  <tbody>
+    <tr *ngFor="let f of fornecedores">
+      <td>{{ f.fornecedorId }}</td>
+      <td>{{ f.nome }}</td>
+      <td>
+        <a [routerLink]="['/cardapios/', f.fornecedorId]">Cardapio</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

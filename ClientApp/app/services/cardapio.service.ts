@@ -10,10 +10,15 @@ export class CardapioService {
               private route:Router
   ) { }
 
-  // getFornecedores() {
-  //   return this.http.get('/api/fornecedores')
-  //     .map(res => res.json());
-  // }
+  getCardapios() {
+    return this.http.get('/api/cardapios')
+      .map(res => res.json());
+  }
+
+  getCardapio(fornId) {
+    return this.http.get('/api/cardapios/' +fornId)
+      .map(res => res.json());
+  }
 
   //Vamos criar um metodo pra poder madnar ele pro servidor
   create(cardapio){

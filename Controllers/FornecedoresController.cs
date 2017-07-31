@@ -39,6 +39,16 @@ namespace AgilFood.Controllers
 
             return Ok(fornecedor.FornecedorId);
         }
-        
+
+        [HttpGet]
+        public async Task<IEnumerable<FornecedorResource>> GetFornecedores()
+        {
+            var fornecedores= await _repository.GetFornecedores();
+
+            return _mapper.Map<IEnumerable<Fornecedor>, IEnumerable<FornecedorResource>>(fornecedores);
+        }
+
+
+
     }
 }

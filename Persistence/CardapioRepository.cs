@@ -28,8 +28,7 @@ namespace AgilFood.Persistence
             }
 
             return await _context.Cardapios
-                           .Include(c => c.Itens)
-                         .SingleOrDefaultAsync(c => c.CardapioId == id);
+                       .SingleOrDefaultAsync(c => c.FornecedorId == id);
 
         }
 
@@ -45,7 +44,7 @@ namespace AgilFood.Persistence
 
         public async Task<List<Cardapio>> GetCardapios()
         {
-            return await _context.Cardapios.Include(m => m.Itens).ToListAsync();
+            return await _context.Cardapios.ToListAsync();
         }
     }
 }
