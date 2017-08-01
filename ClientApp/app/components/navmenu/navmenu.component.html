@@ -32,16 +32,16 @@
                         <span class='glyphicon glyphicon-plus'></span> Novo Fornecedor
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
                     <a [routerLink]="['/fornecedores']">
                         <span class='glyphicon glyphicon-plus'></span> Fornecedores
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
                     <a [routerLink]="['/cardapios']">
                         <span class='glyphicon glyphicon-plus'></span> Cardapios
                     </a>
-                </li>
+                </li> 
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/counter']">
                         <span class='glyphicon glyphicon-education'></span> Counter

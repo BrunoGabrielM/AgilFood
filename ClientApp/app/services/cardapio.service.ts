@@ -8,23 +8,27 @@ export class CardapioService {
 
   constructor(private http: Http,
               private route:Router
-  ) { }
+  ) {}
 
   getCardapios() {
     return this.http.get('/api/cardapios')
       .map(res => res.json());
   }
 
+  // getCardapio(fornId) {
+  //   return this.http.get('/api/cardapios/' + fornId)
+  //     .map(res => res.json());
+  // }
+
   getCardapio(fornId) {
-    return this.http.get('/api/cardapios/' +fornId)
-      .map(res => res.json());
+    return this.http.get('/api/cardapios/' + fornId)
+      .map(res => res.json())
   }
 
-  //Vamos criar um metodo pra poder madnar ele pro servidor
   create(cardapio){
     return this.http.post('/api/cardapios', cardapio)
       .map(res => res.json())
-      .map(id => this.route.navigate(['itens/novo/'+id]))
+      .map(id => this.route.navigate(['itens/novo/'+id]));
   }
 
 }

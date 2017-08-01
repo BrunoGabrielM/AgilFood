@@ -9,7 +9,7 @@
       <th></th>
     </tr>
   </thead>  
-  <tbody>
+ <tbody>
     <tr *ngFor="let c of cardapios">
       <td>{{ c.cardapioId }}</td>
       <td>{{ c.nome }}</td>
@@ -18,7 +18,10 @@
   </tbody>
 </table>
 
+<h4>Cardapio Unico</h4>
 <div>
+  {{ cardapio.cardapioId }}
+  {{ cardapio.nome }}
   {{ cardapio.fornecedorId }}
-  {{ cardapio.peso }}
 </div>
+

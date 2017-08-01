@@ -28,7 +28,7 @@ namespace AgilFood.Persistence
             }
 
             return await _context.Cardapios
-                       .SingleOrDefaultAsync(c => c.FornecedorId == id);
+                            .SingleOrDefaultAsync(c => c.FornecedorId == id);
 
         }
 

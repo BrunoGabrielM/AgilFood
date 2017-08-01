@@ -1,5 +1,4 @@
 import { CardapioService } from './../../services/cardapio.service';
-import { RestauranteService } from './../../services/restaurante.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 

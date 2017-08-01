@@ -18,7 +18,9 @@ export class FornecedorService {
   //Vamos criar um metodo pra poder madnar ele pro servidor
   create(fornecedor){
     return this.http.post('/api/fornecedores', fornecedor)
-      //.map(res => res.json())
+      .map(res => res.json())
       .map(id => this.route.navigate(['cardapios/novo/'+id]))
   }
+
+  
 }

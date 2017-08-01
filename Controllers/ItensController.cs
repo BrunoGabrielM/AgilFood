@@ -37,5 +37,15 @@ namespace AgilFood.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<List<ItemResource>> Getitens(int id)
+        {
+            var itens = await _repository.GetItens(id);
+
+            return Mapper.Map<List<Item>, List<ItemResource>>(itens);
+        }
+
+
     }
 }
