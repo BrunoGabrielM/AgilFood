@@ -27,13 +27,13 @@ namespace AgilFood.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IEnumerable<CardapioResource>> GetCardapios()
-        {
-            var cardapios = await _repository.GetCardapios();
+        //[HttpGet]
+        //public async Task<IEnumerable<CardapioResource>> GetCardapios()
+        //{
+        //    var cardapios = await _repository.GetCardapios();
   
-            return Mapper.Map<List<Cardapio>, List<CardapioResource>>(cardapios);
-        }
+        //    return Mapper.Map<List<Cardapio>, List<CardapioResource>>(cardapios);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateCardapio([FromBody] CardapioResource cardapioResource)
@@ -69,7 +69,6 @@ namespace AgilFood.Controllers
             }
 
             Mapper.Map<CardapioResource, Cardapio>(cardapioResource, cardapio);
-
             await _unitOfWork.CompleteAsync();
 
             cardapio = await _repository.GetCardapio(cardapio.CardapioId);
@@ -97,19 +96,11 @@ namespace AgilFood.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCardapio(int id)
+        public async Task<List<CardapioResource>> GetCardapios(int id)
         {
-            var cardapio = await _repository.GetCardapio(id);
+            var cardapios = await _repository.GetCardapios(id);
 
-            //Se nao existir esse objeto no banco
-            if (cardapio == null)
-            {
-                return NotFound();
-            }
-
-            var cardapioResource = Mapper.Map<Cardapio, CardapioResource>(cardapio);
-
-            return Ok(cardapioResource);
+            return Mapper.Map<List<Cardapio>, List<CardapioResource>>(cardapios);
         }
     }
 }

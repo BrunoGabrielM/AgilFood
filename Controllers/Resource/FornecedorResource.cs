@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AgilFood.Core.Models;
 
 namespace AgilFood.Controllers.Resource
 {
@@ -13,11 +14,13 @@ namespace AgilFood.Controllers.Resource
 
 
         public ICollection<ServicoResource> Servicos { get; set; }
+        public ICollection<CardapioResource> Cardapios { get; set; }
 
 
         public FornecedorResource()
         {
             Servicos = new Collection<ServicoResource>();
+            Cardapios = new Collection<CardapioResource>();
         }
     }
 }

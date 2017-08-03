@@ -70,6 +70,7 @@ namespace AgilFood.Migrations
                     ItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CardapioId = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(nullable: true),
                     Nome = table.Column<string>(nullable: true),
                     Preco = table.Column<double>(nullable: false)
                 },
@@ -87,8 +88,7 @@ namespace AgilFood.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cardapios_FornecedorId",
                 table: "Cardapios",
-                column: "FornecedorId",
-                unique: true);
+                column: "FornecedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Itens_CardapioId",

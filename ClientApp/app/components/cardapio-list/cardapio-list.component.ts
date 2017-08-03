@@ -11,17 +11,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class CardapioListComponent implements OnInit {
 
   cardapios: any[];
-
-  cardapio : any = {
-    id: 0,
-    nome: '',
-    fornecedorId: 0
-  }
+  idFornecedor;
 
   constructor(private cardapioService: CardapioService, 
               private router: ActivatedRoute){
 
-      router.params.subscribe(param => this.cardapio.fornecedorId = param['id'])
+      router.params.subscribe(param => this.idFornecedor = param['id'])
   }
 
   ngOnInit() {
@@ -40,8 +35,8 @@ export class CardapioListComponent implements OnInit {
     //   console.log('Caiu no Else');
     // }
 
-    this.cardapioService.getCardapio(this.cardapio.fornecedorId)
-        .subscribe(result => this.cardapio = result);
+    this.cardapioService.getCardapio(this.idFornecedor)
+        .subscribe(result => this.cardapios = result);
         
   }
 

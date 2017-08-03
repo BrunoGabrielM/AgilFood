@@ -21,13 +21,14 @@ namespace AgilFood.Persistence
 
         public async Task<Cardapio> GetCardapio(int id, bool includeRelated = true)
         {
-
+            //depois quando fazer o AJUSTE, fazer pra trazer a LISTA DE CARDAPIOS
             if (!includeRelated)
             {
                 return await _context.Cardapios.FindAsync(id);
             }
 
             return await _context.Cardapios
+                              .Include(c => c.Itens) //para trazer os itens por lazyLoad
                             .SingleOrDefaultAsync(c => c.FornecedorId == id);
 
         }
@@ -42,9 +43,13 @@ namespace AgilFood.Persistence
             _context.Cardapios.Remove(cardapio);
         }
 
-        public async Task<List<Cardapio>> GetCardapios()
+        public async Task<List<Cardapio>> GetCardapios(int id)
         {
-            return await _context.Cardapios.ToListAsync();
+            var cardapios = _context.Cardapios
+                                 .Include(c => c.Itens)  //para trazer os itens por lazyLoad
+                               .Where(c => c.FornecedorId == id);
+
+            return await cardapios.ToListAsync();
         }
     }
 }

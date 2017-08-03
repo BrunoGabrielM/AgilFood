@@ -27,8 +27,7 @@ namespace AgilFood.Migrations
 
                     b.HasKey("CardapioId");
 
-                    b.HasIndex("FornecedorId")
-                        .IsUnique();
+                    b.HasIndex("FornecedorId");
 
                     b.ToTable("Cardapios");
                 });
@@ -51,6 +50,8 @@ namespace AgilFood.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CardapioId");
+
+                    b.Property<string>("Descricao");
 
                     b.Property<string>("Nome");
 
@@ -84,8 +85,8 @@ namespace AgilFood.Migrations
             modelBuilder.Entity("AgilFood.Core.Models.Cardapio", b =>
                 {
                     b.HasOne("AgilFood.Core.Models.Fornecedor", "Fornecedor")
-                        .WithOne("Cardapio")
-                        .HasForeignKey("AgilFood.Core.Models.Cardapio", "FornecedorId")
+                        .WithMany("Cardapios")
+                        .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

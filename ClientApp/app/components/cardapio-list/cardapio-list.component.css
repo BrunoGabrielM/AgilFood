@@ -1,0 +1,15 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: -8px;
+}
+
+td {
+  border-left-width: 0;
+  min-width: 120px;
+  height: 18px;
+}
+
+td:first-child {
+  border-left-width: 1px;
+}

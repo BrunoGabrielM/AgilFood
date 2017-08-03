@@ -15,4 +15,9 @@ export class ItemService {
       .map(res => res.json());
   }
 
+  getItens(cardId) {
+    return this.http.get('/api/itens/' + cardId)
+      .map(res => res.json())
+  }
+
 }

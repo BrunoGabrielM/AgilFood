@@ -9,7 +9,7 @@ namespace AgilFood.Core
 {
     public interface ICardapioRepository
     {
-        Task<List<Cardapio>> GetCardapios();
+        Task<List<Cardapio>> GetCardapios(int id);
         Task<Cardapio> GetCardapio(int id, bool includeRelated = true);
         void Add(Cardapio cardapio);
         void Remove(Cardapio cardapio);

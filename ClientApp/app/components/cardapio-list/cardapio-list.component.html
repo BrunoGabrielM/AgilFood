@@ -1,27 +1,16 @@
 <h2>Cardapios</h2>
-<!--Montando a tabela-->
 <table class="table">
-  <thead>
+  <ng-container *ngFor="let c of cardapios">
     <tr>
-      <th>Id</th>
-      <th>Nome</th>
-      <th>fornecedorId</th>
-      <th></th>
+      <td>
+        <h3>{{ c.nome }}</h3>
+      </td>
     </tr>
-  </thead>  
- <tbody>
-    <tr *ngFor="let c of cardapios">
-      <td>{{ c.cardapioId }}</td>
-      <td>{{ c.nome }}</td>
-      <td>{{ c.fornecedorId }}</td>
+    <tr *ngFor="let i of c.itens">
+      <td>{{ i.nome }}</td>
+      <td>{{ i.preco }}</td>
+      <td>{{ i.descricao }}</td>
     </tr>
-  </tbody>
+  </ng-container>
 </table>
-
-<h4>Cardapio Unico</h4>
-<div>
-  {{ cardapio.cardapioId }}
-  {{ cardapio.nome }}
-  {{ cardapio.fornecedorId }}
-</div>
 

@@ -13,6 +13,7 @@ namespace AgilFood.Core.Models
 
         public int FornecedorId { get; set; }
         public Fornecedor Fornecedor { get; set; }
+
         public ICollection<Item> Itens { get; set; }
 
 

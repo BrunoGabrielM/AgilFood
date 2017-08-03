@@ -18,6 +18,7 @@ import { FornecedorFormComponent } from './components/fornecedor-form/fornecedor
 import { ItemFormComponent } from "./components/item-form/item-form.component";
 import { FornecedorListComponent } from './components/fornecedor-list/fornecedor-list.component';
 import { CardapioListComponent } from "./components/cardapio-list/cardapio-list.component";
+import { ItemListComponent } from './components/item-list/item-list.component';
 
 
 
@@ -35,20 +36,23 @@ import { CardapioListComponent } from "./components/cardapio-list/cardapio-list.
         FornecedorFormComponent,
         ItemFormComponent,
         FornecedorListComponent,
-        CardapioListComponent
+        CardapioListComponent,
+        ItemListComponent
     ],
     imports: [
         FormsModule,
         BrowserModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'cardapios/novo/:id', component: CardapioFormComponent },
-            { path: 'itens/novo/:id', component: ItemFormComponent },
+            { path: '', redirectTo: 'fornecedores', pathMatch: 'full' },
             { path: 'fornecedores/novo', component: FornecedorFormComponent },
+            { path: 'cardapios/novo/:id', component: CardapioFormComponent },
+            { path: 'itens/novo/:id', component: ItemFormComponent },           
             { path: 'fornecedores', component: FornecedorListComponent },
+            { path: 'itens', component: ItemListComponent },
             { path: 'cardapios', component: CardapioListComponent },
-            { path: 'cardapios/:id', component: CardapioListComponent },
+            { path: 'cardapios/:id', component: CardapioListComponent }, //para trazer so os cardapios referentes ao id do fornecedor
+            { path: 'itens/:id', component: ItemListComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },

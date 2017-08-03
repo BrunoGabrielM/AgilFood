@@ -8,14 +8,15 @@ namespace AgilFood.Core.Models
         public int FornecedorId { get; set; }
         public string Nome { get; set; }    
 
-        public Cardapio Cardapio { get; set; }
+        
         public ICollection<Servico> Servicos { get; set; }
+        public ICollection<Cardapio> Cardapios { get; set; }
 
-
-
+        
         public Fornecedor()
         {
             Servicos = new Collection<Servico>();
+            Cardapios = new Collection<Cardapio>();
         }
     }
 }

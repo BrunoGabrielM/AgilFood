@@ -8,8 +8,8 @@ using AgilFood.Persistence;
 namespace AgilFood.Migrations
 {
     [DbContext(typeof(AgilFoodDbContext))]
-    [Migration("20170727024600_AddItem")]
-    partial class AddItem
+    [Migration("20170803012907_SeedFornecedores")]
+    partial class SeedFornecedores
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +28,7 @@ namespace AgilFood.Migrations
 
                     b.HasKey("CardapioId");
 
-                    b.HasIndex("FornecedorId")
-                        .IsUnique();
+                    b.HasIndex("FornecedorId");
 
                     b.ToTable("Cardapios");
                 });
@@ -52,6 +51,8 @@ namespace AgilFood.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CardapioId");
+
+                    b.Property<string>("Descricao");
 
                     b.Property<string>("Nome");
 
@@ -85,8 +86,8 @@ namespace AgilFood.Migrations
             modelBuilder.Entity("AgilFood.Core.Models.Cardapio", b =>
                 {
                     b.HasOne("AgilFood.Core.Models.Fornecedor", "Fornecedor")
-                        .WithOne("Cardapio")
-                        .HasForeignKey("AgilFood.Core.Models.Cardapio", "FornecedorId")
+                        .WithMany("Cardapios")
+                        .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
