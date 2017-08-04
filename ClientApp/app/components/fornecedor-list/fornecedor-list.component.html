@@ -1,8 +1,7 @@
 <h2>Fornecedores</h2>
 <p>
-  <a [routerLink]="['/fornecedor/novo']" class="btn btn-primary">Novo Fornecedor</a>
+  <a [routerLink]="['/fornecedores/novo']" class="btn btn-primary">Novo Fornecedor</a>
 </p>
-
 <!--Montando a tabela-->
 <table class="table">
   <thead>
@@ -13,7 +12,7 @@
     </tr>
   </thead>  
   <tbody>
-    <tr *ngFor="let f of fornecedores">
+    <tr *ngFor="let f of queryResult.items">
       <td>{{ f.fornecedorId }}</td>
       <td>{{ f.nome }}</td>
       <td>
@@ -22,3 +21,5 @@
     </tr>
   </tbody>
 </table>
+<!--Paging-->
+<pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>

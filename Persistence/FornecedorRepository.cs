@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgilFood.Core;
+using AgilFood.Core.models;
 using AgilFood.Core.Models;
+using AgilFood.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgilFood.Persistence
@@ -34,9 +36,23 @@ namespace AgilFood.Persistence
             _context.Fornecedores.Remove(fornecedor);
         }
 
-        public async Task<IEnumerable<Fornecedor>> GetFornecedores()
+        public async Task<QueryResult<Fornecedor>> GetVehicles(FornecedorQuery queryObj)
         {
-            return await _context.Fornecedores.ToListAsync();
+            var result = new QueryResult<Fornecedor>();
+
+            var query =  _context.Fornecedores.AsQueryable();
+
+            //Paging
+            result.TotalItems = await query.CountAsync(); //contar quantos elementos temos
+
+            query = query.ApplyPaging(queryObj);
+
+            //return await query.ToListAsync();
+
+            result.Items = await query.ToListAsync();
+
+            return result;
+
         }
     }
 }

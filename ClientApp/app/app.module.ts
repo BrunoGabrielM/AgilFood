@@ -19,6 +19,8 @@ import { ItemFormComponent } from "./components/item-form/item-form.component";
 import { FornecedorListComponent } from './components/fornecedor-list/fornecedor-list.component';
 import { CardapioListComponent } from "./components/cardapio-list/cardapio-list.component";
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { PaginationComponent } from "./components/shared/pagination.component";
+
 
 
 
@@ -37,7 +39,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
         ItemFormComponent,
         FornecedorListComponent,
         CardapioListComponent,
-        ItemListComponent
+        ItemListComponent,
+        PaginationComponent
     ],
     imports: [
         FormsModule,
@@ -53,7 +56,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
             { path: 'cardapios', component: CardapioListComponent },
             { path: 'cardapios/:id', component: CardapioListComponent }, //para trazer so os cardapios referentes ao id do fornecedor
             { path: 'itens/:id', component: ItemListComponent },
-            { path: 'home', component: HomeComponent },
+            //{ path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }

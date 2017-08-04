@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgilFood.Controllers.Resource;
 using AgilFood.Core;
+using AgilFood.Core.models;
 using AgilFood.Core.Models;
 using AgilFood.Persistence;
 using AutoMapper;
@@ -41,14 +42,14 @@ namespace AgilFood.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<FornecedorResource>> GetFornecedores()
+        public async Task<QueryResultResource<FornecedorResource>> GetVehicles(FornecedorQueryResource filterResource)
         {
-            var fornecedores= await _repository.GetFornecedores();
+            var filter = _mapper.Map<FornecedorQueryResource, FornecedorQuery>(filterResource);
 
-            return _mapper.Map<IEnumerable<Fornecedor>, IEnumerable<FornecedorResource>>(fornecedores);
+            var queryResult = await _repository.GetVehicles(filter);
+
+            return _mapper.Map<QueryResult<Fornecedor>, QueryResultResource<FornecedorResource>>(queryResult);
         }
-
-
 
     }
 }

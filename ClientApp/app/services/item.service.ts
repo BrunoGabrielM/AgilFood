@@ -20,4 +20,14 @@ export class ItemService {
       .map(res => res.json())
   }
 
+  updade(item){
+    return this.http.put('/api/itens', + item.id, item)
+      .map(res => res.json());
+  }
+
+  delete(id) {
+    return this.http.delete('/api/itens/' + id)
+      .map(res => res.json());
+  }
+
 }

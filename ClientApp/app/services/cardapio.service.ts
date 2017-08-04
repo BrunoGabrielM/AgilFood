@@ -15,11 +15,6 @@ export class CardapioService {
       .map(res => res.json());
   }
 
-  // getCardapio(fornId) {
-  //   return this.http.get('/api/cardapios/' + fornId)
-  //     .map(res => res.json());
-  // }
-
   getCardapio(fornId) {
     return this.http.get('/api/cardapios/' + fornId)
       .map(res => res.json())
@@ -29,6 +24,16 @@ export class CardapioService {
     return this.http.post('/api/cardapios', cardapio)
       .map(res => res.json())
       .map(id => this.route.navigate(['itens/novo/'+id]));
+  }
+
+  updade(cardapio){
+    return this.http.put('/api/cardapios', + cardapio.id, cardapio)
+      .map(res => res.json());
+  }
+
+  delete(id) {
+    return this.http.delete('/api/cardapios/' + id)
+      .map(res => res.json());
   }
 
 }

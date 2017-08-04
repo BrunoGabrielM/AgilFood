@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AgilFood.Core.models;
 using AgilFood.Core.Models;
 
 namespace AgilFood.Core
@@ -11,6 +12,6 @@ namespace AgilFood.Core
         Task<Fornecedor> GetFornecedor(int id, bool includeRelated = true);
         void Add(Fornecedor fornecedor);
         void Remove(Fornecedor fornecedor);
-        Task<IEnumerable<Fornecedor>> GetFornecedores();
+        Task<QueryResult<Fornecedor>> GetVehicles(FornecedorQuery queryObj);
     }
 }

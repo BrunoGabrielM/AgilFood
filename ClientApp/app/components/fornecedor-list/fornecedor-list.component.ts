@@ -8,13 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FornecedorListComponent implements OnInit {
 
-  fornecedores: any[];
+  private readonly PAGE_SIZE = 3; 
+
+  queryResult: any = {};
+  query: any = {
+    pageSize: this.PAGE_SIZE //Record Per Page
+  };
 
   constructor(private fornecedorService: FornecedorService) { }
 
   ngOnInit() {
-    this.fornecedorService.getFornecedores()
-      .subscribe(result => this.fornecedores = result);
+    this.populateFornecedores();
   }
 
+  private populateFornecedores() {
+    this.fornecedorService.getFornecedores(this.query)
+      .subscribe(result => this.queryResult = result);
+  }
+
+  //Paging
+  onPageChange(page) {
+    this.query.page = page; 
+
+    this.populateFornecedores();
+  }
 }

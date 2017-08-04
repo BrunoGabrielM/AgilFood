@@ -10,11 +10,7 @@ export class FornecedorService {
               private route:Router
   ) { }
 
-  getFornecedores() {
-    return this.http.get('/api/fornecedores')
-      .map(res => res.json());
-  }
-
+ 
   //Vamos criar um metodo pra poder madnar ele pro servidor
   create(fornecedor){
     return this.http.post('/api/fornecedores', fornecedor)
@@ -22,5 +18,32 @@ export class FornecedorService {
       .map(id => this.route.navigate(['cardapios/novo/'+id]))
   }
 
+  updade(fornecedor){
+    return this.http.put('/api/fornecedores', + fornecedor.id, fornecedor)
+      .map(res => res.json());
+  }
+
+  delete(id) {
+    return this.http.delete('/api/fornecedores/' + id)
+      .map(res => res.json());
+  }
   
+  getFornecedores(query) {
+    return this.http.get('/api/fornecedores' + '?' + this.toQueryString(query))
+      .map(res => res.json());
+  }
+
+  //Filtiring
+  toQueryString(obj){
+    var parts= [];
+    for(var property in obj){
+
+      var value = obj[property];
+      if(value != null && value != undefined){
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value)); //para fazer o filtro   //prop=value&
+      }
+    }
+
+    return parts.join('&');
+  }
 }

@@ -12,11 +12,11 @@
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
-                <li [routerLinkActive]="['link-active']">
+                <!-- <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
-                </li>
+                </li> -->
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/cardapios/novo']">
                         <span class='glyphicon glyphicon-plus'></span> Novo Cardapio
@@ -34,7 +34,7 @@
                 </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
                     <a [routerLink]="['/fornecedores']">
-                        <span class='glyphicon glyphicon-plus'></span> Fornecedores
+                        <span class='glyphicon glyphicon-home'></span> Fornecedores
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
