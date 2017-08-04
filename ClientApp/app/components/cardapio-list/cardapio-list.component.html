@@ -1,9 +1,15 @@
 <h2>Cardapios</h2>
+<p>
+  <a [routerLink]="['/cardapios/novo/', idFornecedor]" class="btn btn-primary">Adicionar Cardapio</a>
+</p>
 <table class="table">
   <ng-container *ngFor="let c of cardapios">
     <tr>
       <td>
         <h3>{{ c.nome }}</h3>
+        <p>
+          <a [routerLink]="['/itens/novo/', c.cardapioId]" class="btn btn-primary">Adicionar Item</a>
+        </p>
       </td>
     </tr>
     <tr *ngFor="let i of c.itens">

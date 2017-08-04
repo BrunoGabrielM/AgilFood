@@ -12,6 +12,7 @@ export class CardapioListComponent implements OnInit {
 
   cardapios: any[];
   idFornecedor;
+  idCardapio;
 
   constructor(private cardapioService: CardapioService, 
               private router: ActivatedRoute){
