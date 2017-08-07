@@ -2,9 +2,21 @@
 
 
 ```
- npm install
- webpack --config webpack.config.vendor.js (Tem que ser pelo Pront Normal)
- webpack (Tem que ser pelo Pront Normal)
+#No Prompt
+ 1) Chegar na pasta aonde fez o download
 
- Executar Normalmente
+ 2) npm install
+ 3) dotnet restore
+
+#No visual Studio
+ 4) Colocar a conectionString pro banco local
+
+#No Prompt
+ 5) webpack --config webpack.config.vendor.js 
+ 6) webpack 
+
+#No visual Studio
+ 7) database-update (No Nugat-comandLine)
+ 8) Executar Normalmente
 ```
+
