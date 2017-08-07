@@ -8,7 +8,7 @@
       <td>
         <h3>{{ c.nome }}</h3>
         <p>
-          <a [routerLink]="['/itens/novo/', c.cardapioId]" class="btn btn-primary">Adicionar Item</a>
+          <a [routerLink]="['/itens/novo/', c.cardapioId, idFornecedor]" class="btn btn-primary">Adicionar Item</a>
         </p>
       </td>
     </tr>
@@ -16,6 +16,11 @@
       <td>{{ i.nome }}</td>
       <td>{{ i.preco }}</td>
       <td>{{ i.descricao }}</td>
+      <td>{{ i.itemId }}</td>
+      <td>
+        <a [routerLink]="['/itens/edit/', i.itemId, c.fornecedorId]">Editar</a>
+      </td>
     </tr>
   </ng-container>
+  <!-- <app-item-form [idForn]="idFornecedor"></app-item-form> -->
 </table>

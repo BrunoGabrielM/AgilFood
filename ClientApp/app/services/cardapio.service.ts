@@ -20,10 +20,10 @@ export class CardapioService {
       .map(res => res.json())
   }
 
-  create(cardapio){
+  create(cardapio, FornecedorId){
     return this.http.post('/api/cardapios', cardapio)
       .map(res => res.json())
-      .map(id => this.route.navigate(['itens/novo/'+id]));
+      .map(id => this.route.navigate(['itens/novo/'+id+'/'+FornecedorId]));
   }
 
   updade(cardapio){
@@ -33,6 +33,11 @@ export class CardapioService {
 
   delete(id) {
     return this.http.delete('/api/cardapios/' + id)
+      .map(res => res.json());
+  }
+
+  deleteItem(id){
+    return this.http.delete('/api/itens/'+id)
       .map(res => res.json());
   }
 

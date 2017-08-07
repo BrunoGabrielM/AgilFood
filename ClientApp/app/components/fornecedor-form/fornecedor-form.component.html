@@ -11,7 +11,8 @@
     <label for="Nome">Nome</label>
     <input id="fornecedorNome" type="text" class="form-control" [(ngModel)]="fornecedor.nome" name="Nome">
   </div>
-  
    <!--Button-->
   <button class="btn btn-primary">Salvar</button>
+  <button *ngIf="fornecedor.fornecedorId" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
 </form>
+

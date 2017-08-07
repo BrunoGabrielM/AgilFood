@@ -18,4 +18,5 @@
   </div>
    <!--Button-->
   <button class="btn btn-primary">Salvar</button>
+  <button *ngIf="item.itemId" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
 </form>

@@ -20,6 +20,8 @@ import { FornecedorListComponent } from './components/fornecedor-list/fornecedor
 import { CardapioListComponent } from "./components/cardapio-list/cardapio-list.component";
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { PaginationComponent } from "./components/shared/pagination.component";
+import { PhotoService } from "./services/photo.service";
+import { ProgressService } from "./services/progress.service";
 
 
 
@@ -49,9 +51,12 @@ import { PaginationComponent } from "./components/shared/pagination.component";
         RouterModule.forRoot([
             { path: '', redirectTo: 'fornecedores', pathMatch: 'full' },
             { path: 'fornecedores/novo', component: FornecedorFormComponent },
+            { path: 'fornecedores/edit/:id', component: FornecedorFormComponent },
+            { path: 'itens/edit/:itemId/:fornId', component: ItemFormComponent },
             { path: 'cardapios/novo/:id', component: CardapioFormComponent },
-            { path: 'itens/novo/:id', component: ItemFormComponent },           
+            { path: 'itens/novo/:id/:fornId', component: ItemFormComponent },           
             { path: 'fornecedores', component: FornecedorListComponent },
+            { path: 'fornecedores/:id', component: FornecedorFormComponent },
             { path: 'itens', component: ItemListComponent },
             { path: 'cardapios', component: CardapioListComponent },
             { path: 'cardapios/:id', component: CardapioListComponent }, //para trazer so os cardapios referentes ao id do fornecedor
@@ -65,7 +70,9 @@ import { PaginationComponent } from "./components/shared/pagination.component";
     providers: [
       FornecedorService,
       CardapioService,
-      ItemService
+      ItemService,
+      PhotoService,
+      ProgressService
     ]
 })
 export class AppModule {

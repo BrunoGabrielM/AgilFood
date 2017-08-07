@@ -1,5 +1,5 @@
 import { CardapioService } from './../../services/cardapio.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 
@@ -13,6 +13,9 @@ export class CardapioListComponent implements OnInit {
   cardapios: any[];
   idFornecedor;
   idCardapio;
+  
+  idItem;
+  //@ViewChild('i.itemId') itemId: number;
 
   constructor(private cardapioService: CardapioService, 
               private router: ActivatedRoute){
@@ -41,6 +44,12 @@ export class CardapioListComponent implements OnInit {
         
   }
 
- 
+  deleteItem() {
+    if (confirm("Tem certeza?")) {
+      this.cardapioService.deleteItem(this.idItem)
+        .subscribe(x => console.log(x));
+    }
+  }
 
+ 
 }

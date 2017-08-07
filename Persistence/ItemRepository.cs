@@ -20,7 +20,8 @@ namespace AgilFood.Persistence
 
         public async Task<List<Item>> GetItens(int id)
         {
-            var itens = _context.Items.Where(i => i.CardapioId == id);
+            var itens = _context.Items
+                            .Where(i => i.CardapioId == id);
 
             return await itens.ToListAsync();
         }

@@ -21,7 +21,7 @@ export class ItemService {
   }
 
   updade(item){
-    return this.http.put('/api/itens', + item.id, item)
+    return this.http.put('/api/itens/'+item.itemId, item) 
       .map(res => res.json());
   }
 
@@ -30,4 +30,8 @@ export class ItemService {
       .map(res => res.json());
   }
 
+  getItem(id) {
+    return this.http.get('/api/itens/'+id+'/'+7) //nesse caso eu coloquei o 7 apenas pra quando chegar na controler, ela saber q e pra chamar o Action que tiver alem do parametro id tem um outro paraamentro, so pra separar da outra Achtion
+      .map(res => res.json());
+  }
 }

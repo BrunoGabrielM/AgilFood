@@ -36,11 +36,13 @@ namespace AgilFood.Persistence
             _context.Fornecedores.Remove(fornecedor);
         }
 
-        public async Task<QueryResult<Fornecedor>> GetVehicles(FornecedorQuery queryObj)
+        public async Task<QueryResult<Fornecedor>> GetFornecedores(FornecedorQuery queryObj)
         {
             var result = new QueryResult<Fornecedor>();
 
-            var query =  _context.Fornecedores.AsQueryable();
+            var query =  _context.Fornecedores
+                               .Include(f => f.Photos)  //para trazer as fotos por Eager Load
+                            .AsQueryable();
 
             //Paging
             result.TotalItems = await query.CountAsync(); //contar quantos elementos temos

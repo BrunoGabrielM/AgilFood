@@ -46,6 +46,59 @@ namespace AgilFood.Controllers
             return Mapper.Map<List<Item>, List<ItemResource>>(itens);
         }
 
+        [HttpGet("{id}/{cardId}")]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            var item = await _repository.GetItem(id);
 
+            if (item == null)
+                return NotFound();
+
+            var itemResource = _mapper.Map<Item, ItemResource>(item);
+
+            return Ok(itemResource);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateItem(int id, [FromBody] ItemResource itemResource)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //primeiro vamos achar o item no banco 
+            var item = await _repository.GetItem(id);
+
+            //Se nao existir esse objeto no banco
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            Mapper.Map<ItemResource, Item>(itemResource, item);
+            await _unitOfWork.CompleteAsync();
+
+            item = await _repository.GetItem(item.ItemId);
+            var result = _mapper.Map<Item, ItemResource>(item);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var item = await _repository.GetItem(id, includeRelated: false);
+
+            if (item == null)
+                return NotFound();
+
+            _repository.Remove(item);
+            await _unitOfWork.CompleteAsync();
+
+            return Ok(id);
+        }
+        
     }
 }

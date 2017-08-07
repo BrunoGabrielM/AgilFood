@@ -14,11 +14,14 @@ export class FornecedorListComponent implements OnInit {
   query: any = {
     pageSize: this.PAGE_SIZE //Record Per Page
   };
+  photo;
 
   constructor(private fornecedorService: FornecedorService) { }
 
   ngOnInit() {
     this.populateFornecedores();
+
+    //this.photo= this.queryResult.items.photos[0];
   }
 
   private populateFornecedores() {

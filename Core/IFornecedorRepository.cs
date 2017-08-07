@@ -12,6 +12,6 @@ namespace AgilFood.Core
         Task<Fornecedor> GetFornecedor(int id, bool includeRelated = true);
         void Add(Fornecedor fornecedor);
         void Remove(Fornecedor fornecedor);
-        Task<QueryResult<Fornecedor>> GetVehicles(FornecedorQuery queryObj);
+        Task<QueryResult<Fornecedor>> GetFornecedores(FornecedorQuery queryObj);
     }
 }

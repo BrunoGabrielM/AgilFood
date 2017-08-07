@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgilFood.Core;
+using AgilFood.Core.models;
 using AgilFood.Persistence;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -32,11 +33,15 @@ namespace AgilFood
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Configurando as photos
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+
             //Temos que registrar aqui as nossas interfaces
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<ICardapioRepository, CardapioRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
 
             services.AddAutoMapper();
             services.AddDbContext<AgilFoodDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));

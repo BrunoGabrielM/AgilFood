@@ -11,7 +11,6 @@ export class FornecedorService {
   ) { }
 
  
-  //Vamos criar um metodo pra poder madnar ele pro servidor
   create(fornecedor){
     return this.http.post('/api/fornecedores', fornecedor)
       .map(res => res.json())
@@ -19,17 +18,22 @@ export class FornecedorService {
   }
 
   updade(fornecedor){
-    return this.http.put('/api/fornecedores', + fornecedor.id, fornecedor)
+    return this.http.put('/api/fornecedores/'+fornecedor.fornecedorId, fornecedor)
       .map(res => res.json());
   }
 
   delete(id) {
-    return this.http.delete('/api/fornecedores/' + id)
+    return this.http.delete('/api/fornecedores/'+id)
       .map(res => res.json());
   }
   
   getFornecedores(query) {
     return this.http.get('/api/fornecedores' + '?' + this.toQueryString(query))
+      .map(res => res.json());
+  }
+
+  getFornecedor(id) {
+    return this.http.get('/api/fornecedores/' + id)
       .map(res => res.json());
   }
 

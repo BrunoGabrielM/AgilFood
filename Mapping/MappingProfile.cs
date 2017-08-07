@@ -19,6 +19,7 @@ namespace AgilFood.Mapping
             CreateMap<Item, ItemResource>();
             CreateMap<Servico, ServicoResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
+            CreateMap<Photo, PhotoResource>();
 
             //API Resource to Domain [Para fazer o CRUD]
             CreateMap<FornecedorQueryResource, FornecedorQuery>();

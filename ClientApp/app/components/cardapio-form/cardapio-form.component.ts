@@ -1,5 +1,5 @@
 import { CardapioService } from './../../services/cardapio.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -15,6 +15,7 @@ export class CardapioFormComponent implements OnInit {
     FornecedorId: 0
   }
 
+
   constructor(private cardapioService: CardapioService, 
               private router: ActivatedRoute){
 
@@ -26,7 +27,7 @@ export class CardapioFormComponent implements OnInit {
   }
 
   submit(){
-    this.cardapioService.create(this.cardapio)
+    this.cardapioService.create(this.cardapio, this.cardapio.FornecedorId)
       .subscribe(x => console.log(x));
   }
 

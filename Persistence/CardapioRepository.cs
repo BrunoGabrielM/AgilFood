@@ -46,7 +46,7 @@ namespace AgilFood.Persistence
         public async Task<List<Cardapio>> GetCardapios(int id)
         {
             var cardapios = _context.Cardapios
-                                 .Include(c => c.Itens)  //para trazer os itens por lazyLoad
+                                 .Include(c => c.Itens)  //para trazer os itens por Eager Load
                                .Where(c => c.FornecedorId == id);
 
             return await cardapios.ToListAsync();
