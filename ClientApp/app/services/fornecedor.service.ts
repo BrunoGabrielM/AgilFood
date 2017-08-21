@@ -2,28 +2,30 @@ import { Injectable } from '@angular/core';
 import { Http } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
+import { AuthHttp } from "angular2-jwt/angular2-jwt";
 
 @Injectable()
 export class FornecedorService {
 
   constructor(private http: Http,
-              private route:Router
+              private route:Router,
+              private authHttp: AuthHttp      //so pra mandar o token junto com a requisição
   ) { }
 
  
   create(fornecedor){
-    return this.http.post('/api/fornecedores', fornecedor)
+    return this.authHttp.post('/api/fornecedores', fornecedor)
       .map(res => res.json())
       .map(id => this.route.navigate(['cardapios/novo/'+id]))
   }
 
   updade(fornecedor){
-    return this.http.put('/api/fornecedores/'+fornecedor.fornecedorId, fornecedor)
+    return this.authHttp.put('/api/fornecedores/'+fornecedor.fornecedorId, fornecedor)
       .map(res => res.json());
   }
 
   delete(id) {
-    return this.http.delete('/api/fornecedores/'+id)
+    return this.authHttp.delete('/api/fornecedores/'+id)
       .map(res => res.json());
   }
   

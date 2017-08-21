@@ -1,3 +1,4 @@
+import { Auth } from './../../services/auth.service';
 import { CardapioService } from './../../services/cardapio.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
@@ -18,7 +19,8 @@ export class CardapioListComponent implements OnInit {
   //@ViewChild('i.itemId') itemId: number;
 
   constructor(private cardapioService: CardapioService, 
-              private router: ActivatedRoute){
+              private router: ActivatedRoute,
+              private auth: Auth){
 
       router.params.subscribe(param => this.idFornecedor = param['id'])
   }

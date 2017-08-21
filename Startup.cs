@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AgilFood.Controllers;
 using AgilFood.Core;
 using AgilFood.Core.models;
 using AgilFood.Persistence;
@@ -45,6 +46,12 @@ namespace AgilFood
 
             services.AddAutoMapper();
             services.AddDbContext<AgilFoodDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            //Authorization, restringir o acesso a certos Actions conforme os roles, para que alem de estar autenticado, esteja autorizado
+            services.AddAuthorization(options => {
+                options.AddPolicy(Policies.RequireAdminRole, policy => policy.RequireClaim("https://agilfood.com/roles", "Admin"));
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -68,6 +75,13 @@ namespace AgilFood
             }
 
             app.UseStaticFiles();
+
+            var options = new JwtBearerOptions
+            {
+                Audience = "https://api.agilfood.com",
+                Authority = "https://agilfood.auth0.com/"
+            };
+            app.UseJwtBearerAuthentication(options); //here is the medleware
 
             app.UseMvc(routes =>
             {

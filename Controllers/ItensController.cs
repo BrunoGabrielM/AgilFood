@@ -6,6 +6,7 @@ using AgilFood.Controllers.Resource;
 using AgilFood.Core;
 using AgilFood.Core.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgilFood.Controllers
@@ -25,6 +26,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> CreateItem([FromBody] ItemResource itemResource)
         {
 
@@ -60,6 +62,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> UpdateItem(int id, [FromBody] ItemResource itemResource)
         {
 
@@ -87,6 +90,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> DeleteItem(int id)
         {
             var item = await _repository.GetItem(id, includeRelated: false);

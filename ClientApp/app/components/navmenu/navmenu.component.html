@@ -27,7 +27,15 @@
                         <span class='glyphicon glyphicon-plus'></span> Novo Item
                     </a>
                 </li> -->
-                <li [routerLinkActive]="['link-active']">
+                 <li [routerLinkActive]="['link-active']">
+                   <a href="https://agilfood.auth0.com/login?client=2cWXmseW19yZ246Wbkh51XASarvolj2g" *ngIf="!auth.authenticated()">
+                        <span class='glyphicon glyphicon-user'></span> Login
+                    </a>
+                    <a (click)="auth.logout()" *ngIf="auth.authenticated()">
+                        <span class='glyphicon glyphicon-user'></span> Logout
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="auth.isInRole('Admin')">
                     <a [routerLink]="['/fornecedores/novo']">
                         <span class='glyphicon glyphicon-plus'></span> Novo Fornecedor
                     </a>
@@ -37,6 +45,11 @@
                         <span class='glyphicon glyphicon-home'></span> Fornecedores
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="auth.isInRole('Admin')"> <!--so rendenriza se o user estiver admin nos roles-->
+                    <a [routerLink]="['/admin']">
+                        <span class='glyphicon glyphicon-education'></span> Admin
+                    </a>
+                </li>  
                 <!-- <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
                     <a [routerLink]="['/cardapios']">
                         <span class='glyphicon glyphicon-plus'></span> Cardapios

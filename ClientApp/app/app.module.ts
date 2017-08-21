@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { ItemService } from './services/item.service';
 import { CardapioService } from './services/cardapio.service';
 import { FornecedorService } from './services/fornecedor.service';
@@ -22,6 +23,10 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { PaginationComponent } from "./components/shared/pagination.component";
 import { PhotoService } from "./services/photo.service";
 import { ProgressService } from "./services/progress.service";
+import { Auth } from "./services/auth.service";
+import { AuthGuard } from "./services/auth-gaurd.service";
+import { AUTH_PROVIDERS } from "angular2-jwt/angular2-jwt";
+import { AdminAuthGuard } from "./services/admin-auth-guard.service";
 
 
 
@@ -31,6 +36,7 @@ import { ProgressService } from "./services/progress.service";
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
+        AdminComponent,
         AppComponent,
         NavMenuComponent,
         CounterComponent,
@@ -50,11 +56,12 @@ import { ProgressService } from "./services/progress.service";
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
             { path: '', redirectTo: 'fornecedores', pathMatch: 'full' },
-            { path: 'fornecedores/novo', component: FornecedorFormComponent },
-            { path: 'fornecedores/edit/:id', component: FornecedorFormComponent },
+            { path: 'admin', component: AdminComponent, canActivate: [ AdminAuthGuard ] }, //vai ser mostrada apenas se o user tiver o Admin Role
+            { path: 'fornecedores/novo', component: FornecedorFormComponent, canActivate: [ AdminAuthGuard ] },
+            { path: 'fornecedores/edit/:id', component: FornecedorFormComponent, canActivate: [ AdminAuthGuard ] },
             { path: 'itens/edit/:itemId/:fornId', component: ItemFormComponent },
-            { path: 'cardapios/novo/:id', component: CardapioFormComponent },
-            { path: 'itens/novo/:id/:fornId', component: ItemFormComponent },           
+            { path: 'cardapios/novo/:id', component: CardapioFormComponent, canActivate: [ AdminAuthGuard ] },
+            { path: 'itens/novo/:id/:fornId', component: ItemFormComponent, canActivate: [ AdminAuthGuard ] },         
             { path: 'fornecedores', component: FornecedorListComponent },
             { path: 'fornecedores/:id', component: FornecedorFormComponent },
             { path: 'itens', component: ItemListComponent },
@@ -68,11 +75,15 @@ import { ProgressService } from "./services/progress.service";
         ])
     ],
     providers: [
+      Auth,
+      AuthGuard,
+      AUTH_PROVIDERS,
+      AdminAuthGuard,
       FornecedorService,
       CardapioService,
       ItemService,
       PhotoService,
-      ProgressService
+      //ProgressService DEPOIS DEVO COLOCAR ELE NO COMPONENT Q FAZ O UP DE FOTOS PRA MANDAR LEC150
     ]
 })
 export class AppModule {

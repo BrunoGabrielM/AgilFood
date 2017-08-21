@@ -2,16 +2,18 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
+import { AuthHttp } from "angular2-jwt/angular2-jwt";
 
 @Injectable()
 export class ItemService {
 
   constructor(private http: Http,
-              private route:Router
+              private route:Router,
+              private authHttp: AuthHttp
   ) { }
 
   create(item){
-    return this.http.post('/api/itens', item)
+    return this.authHttp.post('/api/itens', item)
       .map(res => res.json());
   }
 
@@ -21,12 +23,12 @@ export class ItemService {
   }
 
   updade(item){
-    return this.http.put('/api/itens/'+item.itemId, item) 
+    return this.authHttp.put('/api/itens/'+item.itemId, item) 
       .map(res => res.json());
   }
 
   delete(id) {
-    return this.http.delete('/api/itens/' + id)
+    return this.authHttp.delete('/api/itens/' + id)
       .map(res => res.json());
   }
 

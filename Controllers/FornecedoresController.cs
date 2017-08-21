@@ -8,6 +8,7 @@ using AgilFood.Core.models;
 using AgilFood.Core.Models;
 using AgilFood.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,7 @@ namespace AgilFood.Controllers
 
 
         [HttpPost]
+        [Authorize(Policies.RequireAdminRole)]  //agora apenas Admins podem criar new vehicles, se caso eu tirasse o Policies.RequireAdminRole, qualquer pessoa logada poderia fazer as operacoes
         public async Task<IActionResult> CreateFornecedor([FromBody] FornecedorResource fornecedorResource)
         {
 
@@ -65,6 +67,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> UpdateFornecedor(int id, [FromBody] FornecedorResource fornecedorResource)
         {
 
@@ -92,6 +95,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> DeleteFornecedor(int id)
         {
             var fornecedor = await _repository.GetFornecedor(id, includeRelated: false);

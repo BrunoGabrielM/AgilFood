@@ -1,5 +1,5 @@
 <h2>Cardapios</h2>
-<p>
+<p  *ngIf="auth.isInRole('Admin')">
   <a [routerLink]="['/cardapios/novo/', idFornecedor]" class="btn btn-primary">Adicionar Cardapio</a>
 </p>
 <table class="table">
@@ -7,7 +7,7 @@
     <tr>
       <td>
         <h3>{{ c.nome }}</h3>
-        <p>
+        <p  *ngIf="auth.isInRole('Admin')">
           <a [routerLink]="['/itens/novo/', c.cardapioId, idFornecedor]" class="btn btn-primary">Adicionar Item</a>
         </p>
       </td>
@@ -17,7 +17,7 @@
       <td>{{ i.preco }}</td>
       <td>{{ i.descricao }}</td>
       <td>{{ i.itemId }}</td>
-      <td>
+      <td  *ngIf="auth.isInRole('Admin')">
         <a [routerLink]="['/itens/edit/', i.itemId, c.fornecedorId]">Editar</a>
       </td>
     </tr>

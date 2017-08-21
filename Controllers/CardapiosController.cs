@@ -7,6 +7,7 @@ using AgilFood.Core;
 using AgilFood.Core.Models;
 using AgilFood.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ namespace AgilFood.Controllers
         //}
 
         [HttpPost]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> CreateCardapio([FromBody] CardapioResource cardapioResource)
         {
 
@@ -50,7 +52,8 @@ namespace AgilFood.Controllers
             
         }
 
-        [HttpPut("{id}")] 
+        [HttpPut("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> UpdateCardapio(int id, [FromBody] CardapioResource cardapioResource)
         {
             
@@ -78,6 +81,7 @@ namespace AgilFood.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policies.RequireAdminRole)]
         public async Task<IActionResult> DeleteCardapio(int id)
         {
             //primeiro vamos achar o cardapio no banco pelo Id

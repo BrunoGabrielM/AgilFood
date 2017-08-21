@@ -1,5 +1,6 @@
 import { FornecedorService } from './../../services/fornecedor.service';
 import { Component, OnInit } from '@angular/core';
+import { Auth } from "../../services/auth.service";
 
 @Component({
   selector: 'app-fornecedor-list',
@@ -16,7 +17,8 @@ export class FornecedorListComponent implements OnInit {
   };
   photo;
 
-  constructor(private fornecedorService: FornecedorService) { }
+  constructor(private fornecedorService: FornecedorService,
+              private auth: Auth) { }
 
   ngOnInit() {
     this.populateFornecedores();
