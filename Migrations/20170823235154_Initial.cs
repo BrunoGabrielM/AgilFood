@@ -23,6 +23,21 @@ namespace AgilFood.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pedidos",
+                columns: table => new
+                {
+                    PedidoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataPedido = table.Column<DateTime>(nullable: false),
+                    EmailUsuario = table.Column<string>(nullable: true),
+                    NomeUsuario = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedidos", x => x.PedidoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cardapios",
                 columns: table => new
                 {
@@ -36,6 +51,26 @@ namespace AgilFood.Migrations
                     table.PrimaryKey("PK_Cardapios", x => x.CardapioId);
                     table.ForeignKey(
                         name: "FK_Cardapios_Fornecedores_FornecedorId",
+                        column: x => x.FornecedorId,
+                        principalTable: "Fornecedores",
+                        principalColumn: "FornecedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FileName = table.Column<string>(maxLength: 255, nullable: false),
+                    FornecedorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Fornecedores_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
@@ -85,6 +120,30 @@ namespace AgilFood.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PedidoItens",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(nullable: false),
+                    PedidoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PedidoItens", x => new { x.ItemId, x.PedidoId });
+                    table.ForeignKey(
+                        name: "FK_PedidoItens_Itens_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Itens",
+                        principalColumn: "ItemId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PedidoItens_Pedidos_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Pedidos",
+                        principalColumn: "PedidoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cardapios_FornecedorId",
                 table: "Cardapios",
@@ -96,6 +155,16 @@ namespace AgilFood.Migrations
                 column: "CardapioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PedidoItens_PedidoId",
+                table: "PedidoItens",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_FornecedorId",
+                table: "Photos",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Servicos_FornecedorId",
                 table: "Servicos",
                 column: "FornecedorId");
@@ -104,10 +173,19 @@ namespace AgilFood.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Itens");
+                name: "PedidoItens");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Servicos");
+
+            migrationBuilder.DropTable(
+                name: "Itens");
+
+            migrationBuilder.DropTable(
+                name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "Cardapios");

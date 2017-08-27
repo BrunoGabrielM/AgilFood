@@ -45,6 +45,11 @@
                         <span class='glyphicon glyphicon-home'></span> Fornecedores
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/pedidos']">
+                        <span class='glyphicon glyphicon-home'></span> Pedidos
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="auth.isInRole('Admin')"> <!--so rendenriza se o user estiver admin nos roles-->
                     <a [routerLink]="['/admin']">
                         <span class='glyphicon glyphicon-education'></span> Admin

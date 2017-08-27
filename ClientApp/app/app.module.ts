@@ -1,3 +1,4 @@
+import { PedidoService } from './services/pedido.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { ItemService } from './services/item.service';
 import { CardapioService } from './services/cardapio.service';
@@ -27,6 +28,7 @@ import { Auth } from "./services/auth.service";
 import { AuthGuard } from "./services/auth-gaurd.service";
 import { AUTH_PROVIDERS } from "angular2-jwt/angular2-jwt";
 import { AdminAuthGuard } from "./services/admin-auth-guard.service";
+import { PedidoListComponent } from './components/pedido-list/pedido-list.component';
 
 
 
@@ -48,7 +50,8 @@ import { AdminAuthGuard } from "./services/admin-auth-guard.service";
         FornecedorListComponent,
         CardapioListComponent,
         ItemListComponent,
-        PaginationComponent
+        PaginationComponent,
+        PedidoListComponent
     ],
     imports: [
         FormsModule,
@@ -68,6 +71,7 @@ import { AdminAuthGuard } from "./services/admin-auth-guard.service";
             { path: 'cardapios', component: CardapioListComponent },
             { path: 'cardapios/:id', component: CardapioListComponent }, //para trazer so os cardapios referentes ao id do fornecedor
             { path: 'itens/:id', component: ItemListComponent },
+            { path: 'pedidos', component: PedidoListComponent },
             //{ path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
@@ -83,6 +87,7 @@ import { AdminAuthGuard } from "./services/admin-auth-guard.service";
       CardapioService,
       ItemService,
       PhotoService,
+      PedidoService
       //ProgressService DEPOIS DEVO COLOCAR ELE NO COMPONENT Q FAZ O UP DE FOTOS PRA MANDAR LEC150
     ]
 })

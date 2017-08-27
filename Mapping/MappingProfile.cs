@@ -20,13 +20,20 @@ namespace AgilFood.Mapping
             CreateMap<Servico, ServicoResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Photo, PhotoResource>();
+            CreateMap<Pedido, PedidoResource>()
+                .ForMember(pr => pr.Itens, opt => opt.MapFrom(pedido => pedido.Itens.Select(pi => new ItemResource { ItemId = pi.Item.ItemId, Nome = pi.Item.Nome, Preco = pi.Item.Preco, Descricao = pi.Item.Descricao})));                
+            CreateMap<Pedido, SavePedidoResource>()
+                .ForMember(pr => pr.Itens, opt => opt.MapFrom(p => p.Itens.Select(pi => pi.ItemId)));
 
             //API Resource to Domain [Para fazer o CRUD]
             CreateMap<FornecedorQueryResource, FornecedorQuery>();
             CreateMap<CardapioResource, Cardapio>();
             CreateMap<FornecedorResource, Fornecedor>();
             CreateMap<ItemResource, Item>();
-            
+            CreateMap<SavePedidoResource, Pedido>()
+                .ForMember(p => p.PedidoId, opt => opt.Ignore())
+                .ForMember(p => p.Itens, opt => opt.MapFrom(pr => pr.Itens.Select(id => new PedidoItem { ItemId = id })));
+
         }
     }
 }

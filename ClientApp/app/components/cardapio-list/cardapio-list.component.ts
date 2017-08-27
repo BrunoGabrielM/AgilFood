@@ -1,3 +1,5 @@
+import { ItemService } from './../../services/item.service';
+import { Item, SavePedido } from './../../models/fornecedor';
 import { Auth } from './../../services/auth.service';
 import { CardapioService } from './../../services/cardapio.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -14,15 +16,33 @@ export class CardapioListComponent implements OnInit {
   cardapios: any[];
   idFornecedor;
   idCardapio;
-  
   idItem;
-  //@ViewChild('i.itemId') itemId: number;
+  
+  itens: Item[] = [];
+  item: Item = {
+    itemId: 0,
+    descricao: '',
+    nome: '',
+    codigo: '',
+    preco: 0,
+  };
+  pedido: SavePedido = {
+    pedidoId: 0,
+    nomeUsuario: '',
+    emailUsuario: '',
+    itens: [],
+  };
+
+  profile: any;
 
   constructor(private cardapioService: CardapioService, 
               private router: ActivatedRoute,
               private auth: Auth){
 
       router.params.subscribe(param => this.idFornecedor = param['id'])
+
+      //Para pegar as coisas do profile
+      this.profile= JSON.parse(localStorage.getItem('profile'));
   }
 
   ngOnInit() {
@@ -53,5 +73,34 @@ export class CardapioListComponent implements OnInit {
     }
   }
 
- 
+  
+
+  //CrudItensPedido
+  addCarrinho(product, productId){
+    console.log(product);
+    console.log(productId);
+
+    this.itens.push(product);
+    this.pedido.itens.push(productId);
+ }
+
+  deleteCarrinho(product, productId){
+      console.log(product);
+
+      var index = this.itens.indexOf(product);
+      this.itens.splice(index, 1);
+
+      var index = this.pedido.itens.indexOf(productId);
+      this.pedido.itens.splice(index, 1);
+  }
+
+  enviarPedido(){
+
+    this.pedido.emailUsuario = this.profile.email;
+    this.pedido.nomeUsuario = this.profile.name;
+    console.log(this.pedido);
+
+    this.cardapioService.postPedido(this.pedido)
+      .subscribe(x => console.log(x));
+  }
 }

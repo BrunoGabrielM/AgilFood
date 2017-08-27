@@ -36,4 +36,5 @@ export class ItemService {
     return this.http.get('/api/itens/'+id+'/'+7) //nesse caso eu coloquei o 7 apenas pra quando chegar na controler, ela saber q e pra chamar o Action que tiver alem do parametro id tem um outro paraamentro, so pra separar da outra Achtion
       .map(res => res.json());
   }
+
 }

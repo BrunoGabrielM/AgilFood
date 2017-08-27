@@ -43,4 +43,11 @@ export class CardapioService {
       .map(res => res.json());
   }
 
+
+  //Enviar o Pedido
+  postPedido(pedido){
+    return this.http.post('/api/pedidos', pedido)
+        .map(res => res.json());
+  }
+
 }

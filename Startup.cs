@@ -41,6 +41,7 @@ namespace AgilFood
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<ICardapioRepository, CardapioRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
 

@@ -20,7 +20,40 @@
       <td  *ngIf="auth.isInRole('Admin')">
         <a [routerLink]="['/itens/edit/', i.itemId, c.fornecedorId]">Editar</a>
       </td>
+      <td>
+        <button class="btn btn-danger" type="button" (click)="addCarrinho(i, i.itemId)">Addicionar</button>
+      </td>
     </tr>
   </ng-container>
   <!-- <app-item-form [idForn]="idFornecedor"></app-item-form> -->
+</table>
+
+<div>
+  <h2>Carrinho
+     <span> 
+       <button class="btn btn-danger" type="button" (click)="enviarPedido()">Enviar Pedido</button>
+     </span>
+  </h2>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Preco</th>
+      <th></th>
+    </tr>
+  </thead>  
+  <tbody>
+    <tr *ngFor="let i of itens">
+      <td>{{ i.itemId }}</td>
+      <td>{{ i.nome }}</td>
+      <td>{{ i.descricao  }}</td>
+      <td>{{ i.preco  }}</td>        
+      <td>
+        <button class="btn btn-danger" type="button" (click)="deleteCarrinho(i, i.itemId)">Excluir</button>
+      </td>      
+    </tr>
+  </tbody>
 </table>

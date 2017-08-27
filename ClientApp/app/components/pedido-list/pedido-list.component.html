@@ -1,0 +1,22 @@
+<h2>Pedidos</h2>
+<table class="table">
+  <ng-container *ngFor="let p of pedidos">
+    <tr>
+      <td>
+        <h3>{{ p.nomeUsuario }}</h3>
+      </td>
+    </tr>
+    <tr *ngFor="let i of p.itens">
+      <td>{{ i.nome }}</td>
+      <td>{{ i.preco }}</td>
+    </tr>
+    <tr>
+      <td>Total: </td>
+      <td>{{ getTotal(p.pedidoId) }}</td>
+    </tr>
+    <p></p>
+  </ng-container>
+</table>
+<div>
+  <h2>Total Geral: <span>{{ getTotalGeral() }}</span></h2>
+</div>

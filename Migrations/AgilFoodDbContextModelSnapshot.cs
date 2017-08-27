@@ -64,6 +64,35 @@ namespace AgilFood.Migrations
                     b.ToTable("Itens");
                 });
 
+            modelBuilder.Entity("AgilFood.Core.Models.Pedido", b =>
+                {
+                    b.Property<int>("PedidoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataPedido");
+
+                    b.Property<string>("EmailUsuario");
+
+                    b.Property<string>("NomeUsuario");
+
+                    b.HasKey("PedidoId");
+
+                    b.ToTable("Pedidos");
+                });
+
+            modelBuilder.Entity("AgilFood.Core.Models.PedidoItem", b =>
+                {
+                    b.Property<int>("ItemId");
+
+                    b.Property<int>("PedidoId");
+
+                    b.HasKey("ItemId", "PedidoId");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("PedidoItens");
+                });
+
             modelBuilder.Entity("AgilFood.Core.models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -113,6 +142,19 @@ namespace AgilFood.Migrations
                     b.HasOne("AgilFood.Core.Models.Cardapio", "Cardapio")
                         .WithMany("Itens")
                         .HasForeignKey("CardapioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AgilFood.Core.Models.PedidoItem", b =>
+                {
+                    b.HasOne("AgilFood.Core.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AgilFood.Core.Models.Pedido", "Pedido")
+                        .WithMany("Itens")
+                        .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
