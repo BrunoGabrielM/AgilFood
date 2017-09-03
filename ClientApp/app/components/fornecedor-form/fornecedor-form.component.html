@@ -1,18 +1,19 @@
-<h1>Novo Fornecedor</h1>
-<!-- <p>
-  {{ fornecedor | json }}<!--Para ver oque ele esta mandando pro servidor
+<div class="card">
+  <h1>Novo Fornecedor</h1>
+  <!-- <p>
+{{ fornecedor | json }}<!--Para ver oque ele esta mandando pro servidor
 </p> -->
 
-<form (ngSubmit)="submit()"> 
-  <h2>Dados do Fornecedor</h2>
+  <form (ngSubmit)="submit()">
+    <h2>Dados do Fornecedor</h2>
 
-  <!--TextBox-->
-  <div class="form-group">
-    <label for="Nome">Nome</label>
-    <input id="fornecedorNome" type="text" class="form-control" [(ngModel)]="fornecedor.nome" name="Nome">
-  </div>
-   <!--Button-->
-  <button class="btn btn-primary">Salvar</button>
-  <button *ngIf="fornecedor.fornecedorId" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
-</form>
-
+    <!--TextBox-->
+    <div class="form-group">
+      <label for="Nome">Nome</label>
+      <input id="fornecedorNome" type="text" class="form-control" [(ngModel)]="fornecedor.nome" name="Nome">
+    </div>
+    <!--Button-->
+    <button class="btn btn-primary">Salvar</button>
+    <button *ngIf="fornecedor.fornecedorId" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+  </form>
+</div>

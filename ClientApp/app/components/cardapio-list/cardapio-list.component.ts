@@ -17,7 +17,7 @@ export class CardapioListComponent implements OnInit {
   idFornecedor;
   idCardapio;
   idItem;
-  
+
   itens: Item[] = [];
   item: Item = {
     itemId: 0,
@@ -35,22 +35,22 @@ export class CardapioListComponent implements OnInit {
 
   profile: any;
 
-  constructor(private cardapioService: CardapioService, 
-              private router: ActivatedRoute,
-              private auth: Auth){
+  constructor(private cardapioService: CardapioService,
+    private router: ActivatedRoute,
+    private auth: Auth) {
 
-      router.params.subscribe(param => this.idFornecedor = param['id'])
+    router.params.subscribe(param => this.idFornecedor = param['id'])
 
-      //Para pegar as coisas do profile
-      this.profile= JSON.parse(localStorage.getItem('profile'));
+    //Para pegar as coisas do profile
+    this.profile = JSON.parse(localStorage.getItem('profile'));
   }
 
   ngOnInit() {
- 
+
     // if(this.cardapio.FornecedorId){
     //   this.cardapioService.getCardapio(this.cardapio.fornecedorId)
     //     .subscribe(result => this.cardapio = result);
-      
+
     //   console.log('Caiu no If');
     // }
 
@@ -62,8 +62,8 @@ export class CardapioListComponent implements OnInit {
     // }
 
     this.cardapioService.getCardapio(this.idFornecedor)
-        .subscribe(result => this.cardapios = result);
-        
+      .subscribe(result => this.cardapios = result);
+
   }
 
   deleteItem() {
@@ -73,28 +73,28 @@ export class CardapioListComponent implements OnInit {
     }
   }
 
-  
+
 
   //CrudItensPedido
-  addCarrinho(product, productId){
+  addCarrinho(product, productId) {
     console.log(product);
     console.log(productId);
 
     this.itens.push(product);
     this.pedido.itens.push(productId);
- }
-
-  deleteCarrinho(product, productId){
-      console.log(product);
-
-      var index = this.itens.indexOf(product);
-      this.itens.splice(index, 1);
-
-      var index = this.pedido.itens.indexOf(productId);
-      this.pedido.itens.splice(index, 1);
   }
 
-  enviarPedido(){
+  deleteCarrinho(product, productId) {
+    console.log(product);
+
+    var index = this.itens.indexOf(product);
+    this.itens.splice(index, 1);
+
+    var index = this.pedido.itens.indexOf(productId);
+    this.pedido.itens.splice(index, 1);
+  }
+
+  enviarPedido() {
 
     this.pedido.emailUsuario = this.profile.email;
     this.pedido.nomeUsuario = this.profile.name;
@@ -102,5 +102,18 @@ export class CardapioListComponent implements OnInit {
 
     this.cardapioService.postPedido(this.pedido)
       .subscribe(x => console.log(x));
+  }
+
+  getTotalGeral() {
+    var total = 0;
+
+    this.itens.forEach(product => {
+
+      total += product.preco;
+
+    });
+
+
+    return total;
   }
 }
