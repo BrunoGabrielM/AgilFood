@@ -12,14 +12,16 @@ namespace AgilFood.Controllers.Resource
     {
         public int FornecedorId { get; set; }
         public string Nome { get; set; }
-       
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public string Celular { get; set; }
+        public EnderecoResource Endereco { get; set; }
 
         public ICollection<ServicoResource> Servicos { get; set; }
         public ICollection<CardapioResource> Cardapios { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
-
-
+        
         public FornecedorResource()
         {
             Servicos = new Collection<ServicoResource>();

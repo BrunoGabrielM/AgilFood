@@ -1,5 +1,5 @@
 import { ItemService } from './../../services/item.service';
-import { Item, SavePedido } from './../../models/fornecedor';
+import { Item, SavePedido, ItemCar } from './../../models/fornecedor';
 import { Auth } from './../../services/auth.service';
 import { CardapioService } from './../../services/cardapio.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -18,7 +18,7 @@ export class CardapioListComponent implements OnInit {
   idCardapio;
   idItem;
 
-  itens: Item[] = [];
+  itens: ItemCar[] = [];
   item: Item = {
     itemId: 0,
     descricao: '',
@@ -32,7 +32,7 @@ export class CardapioListComponent implements OnInit {
     emailUsuario: '',
     itens: [],
   };
-
+  qtd=0;
   profile: any;
 
   constructor(private cardapioService: CardapioService,
@@ -74,12 +74,25 @@ export class CardapioListComponent implements OnInit {
   }
 
 
-
   //CrudItensPedido
   addCarrinho(product, productId) {
     console.log(product);
     console.log(productId);
 
+    //this.itens.item.quantidade;
+    console.log(product.quantidade);
+    //this.qtd = 1;
+
+    this.itens.forEach(prod => {
+      if(productId == prod.itemId){
+        product.quantidade++;
+      }
+
+      else{
+        product.quantidade= this.qtd;
+      }
+    });
+    
     this.itens.push(product);
     this.pedido.itens.push(productId);
   }
@@ -110,7 +123,6 @@ export class CardapioListComponent implements OnInit {
     this.itens.forEach(product => {
 
       total += product.preco;
-
     });
 
 

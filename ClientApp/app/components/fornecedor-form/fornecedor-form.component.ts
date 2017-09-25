@@ -19,7 +19,17 @@ export class FornecedorFormComponent implements OnInit {
   //Variaveis
   fornecedor: any = {
     nome: '',
-    fornecedorId: 0
+    fornecedorId: 0,
+    email: '',
+    telefone: '',
+    celular: '',
+    endereco: {
+      rua: '',
+      numero: 0,
+      cidade: '',
+      bairro: '',
+      cep: '',
+    }
   }
 
   constructor(private fornecedorService: FornecedorService,

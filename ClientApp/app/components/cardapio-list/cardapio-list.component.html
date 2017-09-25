@@ -41,7 +41,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Nome</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
           <th>Preco</th>
           <th></th>
         </tr>
@@ -49,6 +50,7 @@
       <tbody>
         <tr *ngFor="let i of itens">
           <td>{{ i.nome }}</td>
+          <td>{{ i.quantidade }}</td>
           <td>{{ i.preco  }}</td>        
           <td>
             <button class="btn btn-danger" type="button" (click)="deleteCarrinho(i, i.itemId)">Excluir</button>
