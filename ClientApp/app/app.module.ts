@@ -3,9 +3,11 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ItemService } from './services/item.service';
 import { CardapioService } from './services/cardapio.service';
 import { FornecedorService } from './services/fornecedor.service';
+import * as Raven from 'raven-js'; 
 import { FormsModule } from '@angular/forms'; 
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ToastyModule } from 'ng2-toasty';
 import { UniversalModule } from 'angular2-universal';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,11 +31,10 @@ import { AuthGuard } from "./services/auth-gaurd.service";
 import { AUTH_PROVIDERS } from "angular2-jwt/angular2-jwt";
 import { AdminAuthGuard } from "./services/admin-auth-guard.service";
 import { PedidoListComponent } from './components/pedido-list/pedido-list.component';
+import { AppErrorHandler } from './app.error-handler';
 
-
-
-
-
+//para pegar os logs de erro do Sentry
+Raven.config('https://b0d3ef84952f44c9b73b8161359b5167@sentry.io/237084').install();
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -54,9 +55,10 @@ import { PedidoListComponent } from './components/pedido-list/pedido-list.compon
         PedidoListComponent
     ],
     imports: [
-        FormsModule,
-        BrowserModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        FormsModule,
+        ToastyModule.forRoot(),
+        BrowserModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'fornecedores', pathMatch: 'full' },
             { path: 'admin', component: AdminComponent, canActivate: [ AdminAuthGuard ] }, //vai ser mostrada apenas se o user tiver o Admin Role
@@ -79,6 +81,7 @@ import { PedidoListComponent } from './components/pedido-list/pedido-list.compon
         ])
     ],
     providers: [
+      { provide: ErrorHandler, useClass: AppErrorHandler },
       Auth,
       AuthGuard,
       AUTH_PROVIDERS,

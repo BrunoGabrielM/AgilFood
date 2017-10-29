@@ -4,6 +4,7 @@ import { ProgressService, BrowserXhrWithProgress } from "../../services/progress
 import { PhotoService } from "../../services/photo.service";
 import { BrowserXhr } from "@angular/http";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-fornecedor-form',
@@ -33,30 +34,39 @@ export class FornecedorFormComponent implements OnInit {
   }
 
   constructor(private fornecedorService: FornecedorService,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private toastyService: ToastyService,
+    private route: ActivatedRoute,
+    private router: Router) {
 
     //Se tiver ele faz o subscribe, se nao tiver nao faz nada
     route.params.subscribe(p => {
-       this.fornecedor.fornecedorId = +p['id'] || 0;
+      this.fornecedor.fornecedorId = +p['id'] || 0;
     });
   }
 
   ngOnInit() {
     if (this.fornecedor.fornecedorId)
-        this.fornecedorService.getFornecedor(this.fornecedor.fornecedorId)
-          .subscribe(result => this.fornecedor = result);
+      this.fornecedorService.getFornecedor(this.fornecedor.fornecedorId)
+        .subscribe(result => this.fornecedor = result);
   }
 
-  submit(){
-    if(this.fornecedor.fornecedorId){
+  submit() {
+    if (this.fornecedor.fornecedorId) {
       this.fornecedorService.updade(this.fornecedor)
         .subscribe(x => console.log(x));
     }
 
-    else{
+    else {
       this.fornecedorService.create(this.fornecedor)
-        .subscribe(x => console.log(x));
+        .subscribe(x => {
+          this.toastyService.success({
+            title: 'Success',
+            msg: 'Fornecedor Cadastrado com Sucesso.',
+            theme: 'bootstrap',
+            showClose: true,
+            timeout: 5000
+          })
+        });
     }
 
     this.router.navigate(['/fornecedores/', this.fornecedor.fornecedorId])
@@ -70,5 +80,5 @@ export class FornecedorFormComponent implements OnInit {
         });
     }
   }
-     
+
 }
