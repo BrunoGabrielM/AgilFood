@@ -96,6 +96,7 @@ namespace AgilFood.Controllers
             _repository.Remove(cardapio);
             await _unitOfWork.CompleteAsync();
 
+
             return Ok(id);
         }
 
